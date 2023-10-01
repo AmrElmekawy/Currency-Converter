@@ -1,11 +1,14 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
+    kotlin("kapt")
+
 }
 
 android {
     namespace = "com.mekkawy.currencyconverter"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.mekkawy.currencyconverter"
@@ -52,7 +55,7 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
@@ -66,4 +69,70 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    val nav_version = "2.7.3"
+
+    // Java language implementation
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
+    // Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // Testing Navigation
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+    // Jetpack Compose Integration
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    //Lifecycle
+    implementation(Dependencies.lifecycle_viewmodel)
+    implementation(Dependencies.lifecycle_liveData)
+    implementation(Dependencies.lifecycle_runtime)
+
+    //Json
+    implementation(Dependencies.moshi)
+    implementation(Dependencies.gson)
+    kapt(Dependencies.moshiCodegen)
+
+    //Threading-Coroutines
+    implementation(Dependencies.coroutinesCore)
+    implementation(Dependencies.coroutinesCoreAndroid)
+
+    //Navigation Component
+    implementation(Dependencies.navigationComponent)
+    implementation(Dependencies.navigationComponentFrag)
+
+    // network
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.okHttp)
+
+    // image loader
+    implementation(Dependencies.picasso)
+
+    //Unit Testing
+    testImplementation(Dependencies.junit4)
+    testImplementation(Dependencies.junitExtensionsKtx)
+    testImplementation(Dependencies.truth)
+    testImplementation(Dependencies.mockk)
+    testImplementation(Dependencies.robolectric)
+    testImplementation(Dependencies.androidArchCoreTest)
+    testImplementation(Dependencies.coroutinesTest)
+
+    //UI Testing
+    androidTestImplementation(Dependencies.junitExtensions)
+    androidTestImplementation(Dependencies.espressoCore)
+    androidTestImplementation(Dependencies.composeUiTest)
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
